@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask import jsonify
 import requests
 from bs4 import BeautifulSoup
-import openai
 from openai import OpenAI
 import random
 import os
@@ -15,12 +14,13 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 
+
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # Load OpenAI API key from environment variable
-openai.api_key = os.getenv('OPENAI_API_KEY')
-client = OpenAI(api_key=openai.api_key)
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+API_ENDPOINT = "https://api.openai.com/v1/chat/completions"
 
 def scrape_painting():
     api_key = os.getenv("HARVARD_API_KEY")
