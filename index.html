@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art AI Interpreter</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/favicon.png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/static/css/style.css" as="style">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body { font-family: Poppins, sans-serif; font-size: 12px; }
+        h1, h2 { font-size: 2.2rem; font-weight: 600; }
+        .section-header { font-size: 1.5rem; font-weight: 500; margin-top: 20px; margin-bottom: 10px; }
+        .info p {
+            font-size: 1rem; /* New font size for output text */
+            line-height: 1.6;  /* Retaining the original line height */}
+        .twitter-share { font-size: 1.2rem; color: #1da1f2; cursor: pointer; margin-left: 10px; }
+        .modal { display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, .9); }
+        .modal-content { margin: auto; display: block; width: 80%; max-width: 800px; max-height: 80%; }
+        .modal-content img { display: block; width: 100%; height: auto; }
+        .close { color: #fff; position: absolute; top: 20px; right: 20px; font-size: 2rem; font-weight: 700; cursor: pointer; }
+        .loading-cursor * { cursor: progress!important; }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <div class="content">
+            <h1 class="app-title">
+                <a href="/" class="home-link">The AI Museum 🖼️</a>
+            </h1>
+            <img src="{{ painting.image_url }}" loading="lazy" alt="{{ painting.title }}" class="painting" onclick="openModal(this)">
+            <h2>{{ painting.title }}</h2>
+            <p>By {{ painting.artist }} ({{ painting.dated }})</p>
+            <div class="info">
+                <p>{{ painting.info | safe }}</p>
+            </div>
+            <button class="button" onclick="fetchNewPainting()">New artwork 🎨</button>
+            <span id="dark-mode-toggle" class="dark-mode-text">&#127774;</span> <!-- Initially showing the sun emoji -->
+            <a href="https://twitter.com/share?url=https://theartapp.vercel.app/&text=Check%20out%20this%20amazing%20AI%20Art%20App!&hashtags=ArtApp,AI" target="_blank" class="twitter-share">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <div id="modal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                <img id="modal-image">
+            </div>
+        </div>
+        <script>
+            function openModal(img) {
+                var modal = document.getElementById("modal");
+                var modalImg = document.getElementById("modal-image");
+                modal.style.display = "block";
+                modalImg.src = img.src;
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.style.display = "none";
+            }
+
+            async function fetchNewPainting() {
+                document.body.classList.add('loading-cursor');
+                try {
+                    const response = await fetch('/refresh');
+                    const painting = await response.json();
+                    document.querySelector('.painting').src = painting.image_url;
+                    document.querySelector('h2').textContent = painting.title;
+                    document.querySelector('p').textContent = `By ${painting.artist} (${painting.dated})`;
+                    document.querySelector('.info p').innerHTML = painting.info;
+                } catch (error) {
+                    console.error('Failed to fetch new painting:', error);
+                } finally {
+                    document.body.classList.remove('loading-cursor');
+                }
+            }
+        </script>
+        <script>
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
+        <script>
+            function toggleDarkMode() {
+                var darkModeToggle = document.getElementById('dark-mode-toggle');
+                if (document.body.classList.contains('dark-mode')) {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    darkModeToggle.innerHTML = '&#127769;';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    darkModeToggle.innerHTML = '&#127774;';
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+            document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
+            window.addEventListener('load', () => {
+                var darkModeToggle = document.getElementById('dark-mode-toggle');
+                var storedTheme = localStorage.getItem('theme');
+                if (storedTheme === 'light') {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    darkModeToggle.innerHTML = '&#127769;';
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
