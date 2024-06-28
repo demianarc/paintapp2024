@@ -1,0 +1,112 @@
+/* Complete Landing Page Styles for a Minimalist and Centered Design */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f5eb;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure it covers the viewport, but allows it to grow if necessary */
+    padding: 1rem; /* Reduced padding */
+    box-sizing: border-box; /* Includes padding in the height calculation */
+}
+
+.featured-artwork {
+    max-width: 300px; /* Size set to a fixed max-width to control the image size */
+    height: auto;
+    margin: 2rem auto; /* Increased margin for spacing and centers the image horizontally */
+}
+
+.text-content {
+    text-align: center;
+}
+
+.text-content > * {
+    margin: 0.5rem 0; /* Uniform spacing between text elements */
+}
+
+h1 {
+    font-size: 2rem; /* Larger font size for title */
+    margin-bottom: 1rem;
+}
+
+.explanation {
+    font-size: 1.2rem; /* Larger font size for explanation */
+    margin-bottom: 2rem;
+}
+
+.enter-app-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 1.5rem 0 1rem 0; /* Space above and below the button */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.enter-app-button:hover {
+    background-color: #367c39;
+    transform: scale(1.05);
+}
+
+.dark-mode-text {
+    font-size: 1rem; /* Adjusted size for the emoji */
+    cursor: pointer;
+    display: block; /* Emoji on its own line */
+    margin: 1.2rem auto 7rem; /* Adjusted margin to add a slight space */
+}
+
+.footer {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #666;
+    margin-top: auto;
+    padding-bottom: 0.5rem;
+}
+
+body.dark-mode .footer {
+    color: #ccc;
+}
+
+.loading-cursor {
+    cursor: progress!important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease-out;
+}
+
+@media (min-width: 992px) {
+    .landing-container {
+        justify-content: flex-start; /* Aligns content to the top */
+        padding-top: 3rem; /* Add padding at the top to center vertically */
+    }
+
+    .featured-artwork {
+        max-width: 25%; /* Adjusted to be smaller on larger screens */
+    }
+
+    .text-content {
+        max-width: 50%;
+        margin-top: 0; /* Remove additional top margin */
+    }
+}

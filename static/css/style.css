@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f5eb;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212; /* Unified shade of black */
+    color: #ffffff;
+}
+
+body.light-mode {
+    background-color: #f7f5eb;
+    color: #000;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 1200px; /* Width of the average MacBook Pro screen */
+    width: 100%;
+}
+
+.content {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1200px; /* Adjusted to the size of the average MacBook Pro */
+    padding: 20px; /* Padding to prevent content from touching the edges */
+}
+
+.subheading {
+    font-size: 0.6rem;
+    font-style: italic;
+    margin: 0.2rem 0 0.6rem;
+    text-indent: 1rem;
+}
+
+.hover-effect:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.painting {
+    max-width: 50%;
+    max-width: 100px
+    height: auto;
+    box-shadow: 0 4px 6px #010101;
+    margin-bottom: 2rem;
+    transition: 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.painting:hover {
+    transform: scale(1.1);
+    border: 2px solid #000;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 3rem; /* Adjust size as needed */
+    font-weight: 700; /* Lato's bold weight for emphasis */
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info {
+    max-width: 60%; /* Adjust to the desired width */
+    margin: 0 auto; /* This centers the `.info` block */
+    text-align: justify; /* Justify text for a cleaner look */
+}
+
+.info p {
+    margin-bottom: 1em; /* Adds space between paragraphs */
+    line-height: 1.5; /* Makes the text easier to read */
+}
+
+.button {
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 10px;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.app-title .home-link {
+    font-family: 'Lato', sans-serif; /* Or any other font you are using for the title */
+    font-size: 3rem; /* Adjust to match your title size */
+    font-weight: 700; /* Adjust to match your title weight */
+    color: inherit; /* This will use the current text color */
+    text-decoration: none; /* No underline for the title */
+    cursor: pointer; /* Change cursor to indicate link */
+}
+
+.app-title .home-link:hover,
+.app-title .home-link:focus {
+    text-decoration: underline; /* Adds underline on hover/focus for visual feedback */
+}
+
+.home-link-container {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0; /* Adjust spacing as needed */
+}
+
+.home-link {
+    font-size: 1rem; /* Adjust size as needed */
+    color: inherit; /* Inherit the text color from the body */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.home-link:hover {
+    text-decoration: none; /* Removes underline on hover for a subtle effect */
+}
+
+.button:hover {
+    background-color: #455a64; /* Darker shade for the hover effect */
+    color: #ffffff;
+    transform: scale(1.05); /* Slightly enlarges the button */
+}
+
+.dark-mode-text {
+    cursor: pointer;
+    color: inherit; /* Inherit color from body for automatic theme change */
+    font-size: 1rem; /* Adjust the size as needed */
+    margin-top: 10px;
+    display: block; /* Ensures it appears on a new line */
+    text-decoration: none; /* Removes underline */
+}
+
+/* Ensure all backgrounds are unified in dark mode */
+.dark-mode .container, .dark-mode .content {
+    background-color: #121212; /* Same shade of black for consistency */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease-out;
+}
